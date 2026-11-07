@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:bill_assistant_test;MODE=MySQL;DB_CLOSE_DELAY=-1
+    username: sa
+    password: ''
+    driver-class-name: org.h2.Driver
+
+app:
+  auth:
+    jwt-secret: YmlsbC1hc3Npc3RhbnQtdGVzdC1vbmx5LWtleS0zMi1ieXRlcy1sb25n

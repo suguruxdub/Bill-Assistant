@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.billassistant.dao.UserMapper">
+    <resultMap id="userResultMap" type="com.billassistant.model.UserEntity">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password_hash" property="passwordHash"/>
+        <result column="nickname" property="nickname"/>
+        <result column="email" property="email"/>
+        <result column="phone" property="phone"/>
+        <result column="avatar_url" property="avatarUrl"/>
+        <result column="gender" property="gender"/>
+        <result column="birthday" property="birthday"/>
+        <result column="enabled" property="enabled"/>
+        <result column="created_at" property="createdAt"/>
+        <result column="updated_at" property="updatedAt"/>
+    </resultMap>
+
+    <sql id="userColumns">
+        id, username, password_hash, nickname, email, phone, avatar_url,
+        gender, birthday, enabled, created_at, updated_at
+    </sql>
+
+    <select id="findByUsername" resultMap="userResultMap">
+        SELECT <include refid="userColumns"/> FROM users WHERE username = #{username}
+    </select>
+
+    <select id="findById" resultMap="userResultMap">
+        SELECT <include refid="userColumns"/> FROM users WHERE id = #{id}
+    </select>
+
+    <insert id="insert" parameterType="com.billassistant.model.UserEntity"
+            useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        INSERT INTO users (username, password_hash, nickname, email, phone, avatar_url,
+                           gender, birthday, enabled, created_at, updated_at)
+        VALUES (#{username}, #{passwordHash}, #{nickname}, #{email}, #{phone}, #{avatarUrl},
+                #{gender}, #{birthday}, #{enabled}, #{createdAt}, #{updatedAt})
+    </insert>
+</mapper>

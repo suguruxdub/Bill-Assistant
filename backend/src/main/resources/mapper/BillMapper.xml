@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.billassistant.dao.BillMapper">
+    <resultMap id="billResultMap" type="com.billassistant.model.BillEntity">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="title" property="title"/>
+        <result column="amount" property="amount"/>
+        <result column="billing_date" property="billingDate"/>
+        <result column="category" property="category"/>
+        <result column="paid" property="paid"/>
+    </resultMap>
+
+    <select id="findAll" resultMap="billResultMap">
+        SELECT id, user_id, title, amount, billing_date, category, paid
+        FROM bills
+        WHERE user_id = #{uid}
+        ORDER BY billing_date DESC, id DESC
+    </select>
+
+    <insert id="insert" parameterType="com.billassistant.model.BillEntity"
+            useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        INSERT INTO bills (user_id, title, amount, billing_date, category, paid)
+        VALUES (#{userId}, #{title}, #{amount}, #{billingDate}, #{category}, #{paid})
+    </insert>
+</mapper>
