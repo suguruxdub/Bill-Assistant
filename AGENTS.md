@@ -75,6 +75,8 @@ mvn -Dredis.integration=true -Dtest=RedisSessionIntegrationTests test
 ## 变更流程
 
 1. 先确认改动属于 `frontend`、`backend` 还是两者。
-2. 修改后运行受影响模块的构建或测试命令。
-3. 新增 API 或环境变量时更新文档和 `.env.example`。
-4. 不要提交构建产物、依赖目录、IDE 私有配置或真实密钥。
+2. 用户说“提交”时，先运行完整默认验证：`cd backend && mvn test`，以及 `cd frontend && npm run typecheck && npm run build`；真实 MySQL/Redis 集成测试仅在用户明确要求或显式启用时运行。
+3. 验证全部通过后，使用简洁的一句话英文 commit message 创建提交。
+4. 提交完成后直接 push 当前分支到其对应远程分支；如 push 被权限、认证或远程状态阻塞，再向用户报告。
+5. 新增 API 或环境变量时更新文档和 `.env.example`。
+6. 不要提交构建产物、依赖目录、IDE 私有配置或真实密钥。
