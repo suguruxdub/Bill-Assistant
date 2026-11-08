@@ -10,6 +10,7 @@ Bill Assistant 是个人账单管理 Web 应用。代码按前后端分离组织
 - `backend/`：Java 17 + Spring Boot + MyBatis + Maven。按 `controller`、`dto`、`service`、`dao`、`model` 分层；`dao` 中的 Mapper 负责数据库访问。
 - `README.md`：运行和项目概览。
 - 本地存储：MySQL 8.4（`127.0.0.1:3306`）与 Redis（`127.0.0.1:6379`）。连接配置见 `backend/.env.example`；真实凭据仅放在已忽略的 `backend/.env` 和 `.local/` 中。
+- AI 私密配置放在已忽略的 `backend/.ai-secrets.env`（可从 `backend/.ai-secrets.env.example` 创建）；该文件及其中的 `AI_API_KEY`、`AI_BASE_URL` 禁止读取、打印、记录、提交或展示给用户。需要修改时只说明变量名和配置位置，不要读取其值。
 
 不要在仓库根目录新增 Java 或 Node 应用代码；新功能应放入对应模块。
 
@@ -50,6 +51,7 @@ mvn -Dredis.integration=true -Dtest=RedisSessionIntegrationTests test
 - 金额使用 `BigDecimal`，日期使用 `java.time` 类型，禁止使用 `double` 表示金额。
 - 输入 DTO 做校验，错误响应保持一致且不要泄露内部堆栈。
 - 默认配置适合本地开发，生产环境的密钥和连接信息必须通过环境变量注入。
+- AI 模型密钥和私有模型服务地址只能通过 `backend/.ai-secrets.env` 或外部环境变量注入；任何自动化代理不得读取该文件内容，也不得把其值写入日志、补丁、测试输出或文档。
 - Capacitor App 使用 Bearer Token 跨源访问 `/api` 时，只允许 `APP_CORS_ALLOWED_ORIGINS` 配置的来源；不得对 App 跨源请求开启 Cookie 凭据。
 - MySQL 负责账单主数据，Redis 用于缓存和短期状态；新增缓存时使用 `bill-assistant:` 键前缀并设置适当过期时间。
 - 普通测试使用 `test` profile、H2、相同的 Flyway 迁移及测试专用内存 SessionStore，数据测试使用事务回滚。真实 MySQL/Redis 测试必须显式启用并清理其自身测试数据，不得使用 FLUSHDB 或删除其他用户的键。

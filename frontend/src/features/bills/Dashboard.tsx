@@ -9,6 +9,7 @@ import CreateBillDialog from './CreateBillDialog'
 import './bills.css'
 import type { Bill } from './types'
 import type { UserProfile } from '../auth/types'
+import AgentPanel from '../agent/AgentPanel'
 
 type Props = { user: UserProfile; onSignedOut: () => void }
 
@@ -81,6 +82,7 @@ export default function Dashboard({ user, onSignedOut }: Props) {
 
       <BillSummary bills={bills} loading={loading} error={error} />
       <BillList bills={bills} loading={loading} error={error} />
+      <AgentPanel />
       {creatingBill && <CreateBillDialog onClose={() => setCreatingBill(false)} onCreated={handleCreated} onSignedOut={onSignedOut} />}
     </main>
   )

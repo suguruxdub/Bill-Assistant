@@ -1,0 +1,13 @@
+.agent-panel { margin-top: 2rem; padding: 1.4rem; border: 1px solid var(--line, #e7e2da); border-radius: 18px; background: #fffdf9; }
+.agent-heading { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; }
+.agent-heading h2 { margin: .2rem 0 0; font-size: 1.25rem; }
+.agent-badge { padding: .35rem .6rem; border-radius: 99px; background: #eef6ed; color: #357047; font-size: .75rem; }
+.agent-suggestions { display: flex; flex-wrap: wrap; gap: .6rem; margin: 1rem 0; }
+.agent-suggestions button { border: 1px solid var(--line, #e7e2da); border-radius: 99px; background: white; padding: .55rem .8rem; color: inherit; cursor: pointer; }
+.agent-messages { display: grid; gap: .55rem; max-height: 18rem; overflow-y: auto; margin: 1rem 0; }
+.agent-message { max-width: 85%; margin: 0; padding: .7rem .85rem; border-radius: 12px; white-space: pre-wrap; }
+.agent-message.user { justify-self: end; background: #23463b; color: white; }
+.agent-message.assistant { justify-self: start; background: #f1eee8; }
+.agent-form { display: flex; gap: .6rem; }
+.agent-form input { min-width: 0; flex: 1; border: 1px solid var(--line, #d8d1c6); border-radius: 10px; padding: .7rem .8rem; background: white; }
+@media (max-width: 560px) { .agent-form { flex-direction: column; } .agent-form .primary-button { width: 100%; } }

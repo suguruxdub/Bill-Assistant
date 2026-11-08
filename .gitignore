@@ -55,6 +55,8 @@ yarn-error.log*
 .env
 .env.*
 !.env.example
+/.ai-secrets.env
+/backend/.ai-secrets.env
 *.log
 *.pid
 *.pem

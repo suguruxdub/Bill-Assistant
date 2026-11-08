@@ -4,6 +4,7 @@
 
 - `frontend`：React、TypeScript、Vite、Capacitor
 - `backend`：Java 17、Spring Boot、MyBatis、MySQL、Redis、Flyway、Maven
+- AI 账单助手：后端使用 Spring AI，只读查询当前用户账单；默认关闭，需显式配置模型服务
 
 ## 本地运行
 
@@ -157,6 +158,9 @@ npm run build
 | POST | `/api/app/auth/logout` | 撤销 App 刷新会话 |
 | GET | `/api/bills` | 当前用户的账单列表，按账单日期、ID 倒序，需要登录 |
 | POST | `/api/bills` | 创建当前用户的账单，由 MySQL 自增生成 ID，需要登录 |
+| POST | `/api/agent/chat` | 使用只读 AI 工具查询当前用户账单，需要登录 |
+
+AI 助手默认关闭。启用前，将 `AI_ENABLED=true` 和 `AI_MODEL` 写入 `backend/.env`，将私密的 `AI_API_KEY` 与 `AI_BASE_URL` 写入 `backend/.ai-secrets.env`（模板见 `backend/.ai-secrets.env.example`）。第一阶段只支持账单查询和统计，不会创建、修改或删除账单；模型服务故障返回 `503`。
 
 注册的必填字段为 `username`、`password`；可选字段为 `nickname`、`email`、`phone`、`gender`、`birthday`。用户名为 3～32 位字母、数字或下划线，且不能以下划线开头；统一转为小写，用户名和非空邮箱唯一。密码至少 8 个字符，最多 72 个 UTF-8 字节；邮箱和联系电话目前仅存储，不进行验证。性别取值为 `UNSPECIFIED`、`MALE`、`FEMALE` 或 `OTHER`。生日格式为 `YYYY-MM-DD`，不能晚于今天。
 

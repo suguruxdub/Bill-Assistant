@@ -1,8 +1,15 @@
 spring:
   application:
     name: bill-assistant-backend
+  ai:
+    openai:
+      api-key: ${AI_API_KEY:disabled}
+      base-url: ${AI_BASE_URL:https://api.openai.com}
+      chat:
+        options:
+          model: ${AI_MODEL:gpt-4o-mini}
   config:
-    import: optional:file:./.env[.properties],optional:file:./backend/.env[.properties]
+    import: optional:file:./.env[.properties],optional:file:./backend/.env[.properties],optional:file:./.ai-secrets.env[.properties],optional:file:./backend/.ai-secrets.env[.properties]
   datasource:
     url: jdbc:mysql://${MYSQL_HOST:127.0.0.1}:${MYSQL_PORT:3306}/${MYSQL_DATABASE:bill_assistant}?connectionTimeZone=Asia/Shanghai&characterEncoding=UTF-8
     username: ${MYSQL_USER:bill_assistant}
@@ -27,6 +34,8 @@ mybatis:
     map-underscore-to-camel-case: true
 
 app:
+  ai:
+    enabled: ${AI_ENABLED:false}
   cors:
     allowed-origins: "${APP_CORS_ALLOWED_ORIGINS:http://localhost,capacitor://localhost}"
   auth:
