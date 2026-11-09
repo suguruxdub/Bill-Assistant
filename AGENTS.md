@@ -11,6 +11,7 @@ Bill Assistant 是个人账单管理 Web 应用。代码按前后端分离组织
 - `README.md`：运行和项目概览。
 - 本地存储：MySQL 8.4（`127.0.0.1:3306`）与 Redis（`127.0.0.1:6379`）。连接配置见 `backend/.env.example`；真实凭据仅放在已忽略的 `backend/.env` 和 `.local/` 中。
 - AI 私密配置放在已忽略的 `backend/.ai-secrets.env`（可从 `backend/.ai-secrets.env.example` 创建）；该文件及其中的 `AI_API_KEY`、`AI_BASE_URL` 禁止读取、打印、记录、提交或展示给用户。需要修改时只说明变量名和配置位置，不要读取其值。
+- 绝对禁止读取 `backend/.ai-secrets.env` 的内容，包括通过 `cat`、`sed`、`rg`、脚本、IDE 检查或测试间接读取；不得尝试验证其中的值，只能使用 `.ai-secrets.env.example` 或环境变量名作为配置依据。
 
 不要在仓库根目录新增 Java 或 Node 应用代码；新功能应放入对应模块。
 
